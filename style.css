@@ -97,3 +97,38 @@ footer {
 .projects button:hover {
     background-color: #0056b3;
 }
+
+.form-floating .form-control:focus {
+    z-index: 2;  /* Ensures the label stays on top when the input is focused */
+  }
+  
+  .form-floating label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+  
+  .form-floating .form-control:focus ~ label,
+  .form-floating .form-control:not(:placeholder-shown) ~ label {
+    top: -10px;
+    font-size: 0.85rem;
+    color: #007bff; /* You can change this to your preferred color */
+  }
+  
+  /* Footer styling */
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa; /* Light background for footer */
+    color: #6c757d; /* Light gray text */
+  }
+  
+  footer p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
