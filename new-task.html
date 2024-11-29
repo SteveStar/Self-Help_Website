@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create New Task</title>
+ 
+<body>
+  <h1>Create New Task</h1>
+  <form id="task-form">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br><br>
+	<label for="dueDate">Due Date</label>
+	<input id="dueDate" type="datetime-local" name="dueDate" required></label><br><br>
+	<label for="content">Content:</label>   
+    <textarea id="content" name="content" required></textarea><br><br>
+	<label for="points">Points:</label>
+	<textarea id="points" type="number" name="points"></textarea><br><br>
+    <button type="submit">Create Task</button>
+  </form>
+
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+let questId = urlParams.get('questId');
+let tasksId = `tasks_${questId}`;
+let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
+
+console.log(questId);
+console.log(tasksId);
+
+    function createTask() {
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value; 
+	  const dueDate = document.getElementById('dueDate').value; 
+	  const points = document.getElementById('points').value;
+	const due = new Date(dueDate);
+	const dayOfWeek = due.getDay();
+	const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	const dayName = daysOfWeek[dayOfWeek];	  
+
+      const newTask = {
+        title,
+        content,
+		dueDate,
+		dayName, 
+		points,
+		completed: "false"
+      };
+
+      tasks.push(newTask);
+	  const sortedTasks = sortTasks(tasks);
+      localStorage.setItem(tasksId, JSON.stringify(sortedTasks));
+
+      window.location.href = 'tasks.html?questId='+`${questId}`;
+    }
+	
+	function sortTasks(tasks) {
+	return tasks.sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+
+    // Compare dates first, then sort by index as a tiebreaker
+    if (dateA === dateB) {
+      return a.index - b.index; // Sort by index if dates are equal
+    } else {
+      return dateB - dateA; // Sort by latest due date first
+    }
+  });
+}
+
+    document.getElementById('task-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      createTask();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TO DOOM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Just do it!</h1>
+  <ul id="taskList"></ul>
+  <div id="createTask"></div>
+  <label for="points">Points:</label>
+  <div id="points">0</div><br><br>
+ 
+ 
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+let questId = urlParams.get('questId');
+console.log(questId);
+let tasksId = `tasks_${questId}`;
+console.log(tasksId);
+let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
+let pointsCounter = 0;
+    function displayTasks() {
+      let taskList = document.getElementById('taskList');
+	  let createTask = document.getElementById('createTask')
+      taskList.innerHTML = ''; // Clear existing content
+
+      tasks.forEach((task, index) => {
+        let li = document.createElement('li');
+        li.innerHTML = `
+          <h2>${task.title}</h2>
+		  <p>${task.content}</p>
+		  <p>${task.dueDate}</p>
+		  <p>${task.dayName}</p>
+		  <p>XP=${task.points}</p>
+          <a href='task.html?questId=${questId}&index=${index}'>Edit</a>
+        `;
+			if (task.completed === "true") {
+				li.classList.add("completed");
+				pointsCounter = pointsCounter + parseFloat(task.points);
+			} 
+	  
+        taskList.appendChild(li);
+		});
+	  let link = document.createElement('a');
+	  link.textContent = "Create task";
+	  link.href = 'new-task.html?questId='+`${questId}`;
+	  createTask.appendChild(link);
+	  document.getElementById('points').textContent = pointsCounter;
+    }
+
+    displayTasks();
+	
+function checkForNotifications() {
+  for ( let i = 0; tasks.length > i; i++) {
+    let task = tasks[i];
+    let dueDate = new Date(task.dueDate).getTime();
+    let timeDifference = dueDate - Date.now();
+
+    if (0 >= timeDifference) {
+      alert(`${task.title}` + " is due");
+	  continue;
+    } else if (3600000 >= timeDifference > 0) {
+	alert(`${task.title}` + " is due in " + `${Math.ceil(timeDifference/60000)}` + " minutes");
+	continue;
+	}else{
+	continue;
+	}
+  }
+  setTimeout(checkForNotifications, 60000);
+} //This function can be adapted for hours, days, etc...
+checkForNotifications();
+
+
+</script>
+</body>
+</html>
+
+</script>
+</body>
+</html>
