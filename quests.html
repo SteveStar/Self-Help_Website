@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quest List</title>
+</head>
+<body>
+  <h1>Just do it!</h1>
+  <ul id="questList"></ul>
+  <a href="new-quest.html">Create New Quest</a>
+ 
+<script>
+const quests = JSON.parse(localStorage.getItem('quests')) || [];
+    function displayQuests() {
+      const taskList = document.getElementById('taskList');
+      questList.innerHTML = ''; // Clear existing content
+      quests.forEach((quest, index) => {
+	  li = document.createElement('li');
+        li.innerHTML = `
+          <h2>${quest.title}</h2>
+		  <p>${quest.content}</p>
+		  <a href='tasks.html?questId=${index + 1}'>Manage quest</a>
+          <a href="quest.html?questId=${index}">Edit quest</a>
+        `;
+        questList.appendChild(li);
+      });
+	  }
+
+    displayQuests();
+
+
+</script>
+</body>
+</html>
+
+</script>
+</body>
+</html>
