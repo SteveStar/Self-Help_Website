@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-<body>
+<body> 
   <h1>Just do it!</h1>
   <ul id="taskList"></ul>
   <div id="createTask"></div>
   <label for="points">Points:</label>
   <div id="points">0</div><br><br>
- 
+<!--Add a class here to modify the design; design should be universal.-->
  
 <script>
 const urlParams = new URLSearchParams(window.location.search);
@@ -51,6 +51,7 @@ let pointsCounter = 0;
 	  link.href = 'new-task.html?questId='+`${questId}`;
 	  createTask.appendChild(link);
 	  document.getElementById('points').textContent = pointsCounter;
+    
     }
 
     displayTasks();

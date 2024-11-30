@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <h1>Self-Help_Website</h1>
+        <h1>Self-Help Website</h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="Website.html">Home</a>
@@ -29,10 +29,16 @@
     </header>
 <br>
 <br> 
- 
-<h1>Just do it!</h1>
-<ul id="questList"></ul>
-<a href="new-quest.html">Create New Quest</a>
+
+<div class="motivator">
+  <h1>Just do it!</h1>
+</div>
+
+  <ul id="questList"></ul>
+
+<div class="brandNewQuest">
+  <a href="new-quest.html">Create New Quest</a>
+</div>
 
 <script>
 const quests = JSON.parse(localStorage.getItem('quests')) || [];
@@ -40,8 +46,8 @@ const quests = JSON.parse(localStorage.getItem('quests')) || [];
     const taskList = document.getElementById('taskList');
     questList.innerHTML = ''; // Clear existing content
     quests.forEach((quest, index) => {
-  li = document.createElement('li');
-      li.innerHTML = `
+  li = document.createElement('li'); //Add customization to the listed quests here. CSS; remove bullet point, align.
+      li.innerHTML = ` 
         <h2>${quest.title}</h2>
     <p>${quest.content}</p>
     <a href='tasks.html?questId=${index + 1}'>Manage quest</a>
