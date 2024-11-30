@@ -27,7 +27,7 @@
     const quests = JSON.parse(localStorage.getItem('quests'));
     const quest = quests[questId];
     if (!quest) {
-      window.location.href = 'quests.html';
+      window.location.href = 'PageOne.html';
     }
 
     const form = document.getElementById('questForm');
@@ -43,14 +43,14 @@
       quests[questId] = {title, content};
       localStorage.setItem('quests', JSON.stringify(quests));
 
-      window.location.href = 'quests.html';
+      window.location.href = 'PageOne.html';
     }
 	
 
     function deleteQuest() {
       quests.splice(questId, 1);
       localStorage.setItem('quests', JSON.stringify(quests));
-      window.location.href = 'quests.html';
+      window.location.href = 'PageOne.html';
     }	
   </script>
 </body>

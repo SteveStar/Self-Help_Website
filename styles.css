@@ -1,4 +1,4 @@
 li.completed {
-font-color: grey;
+color: grey;
 text-decoration: line-through;
 }
