@@ -21,7 +21,7 @@
 	<textarea id="points" name="points"></textarea><br><br>
 	</form>
 	<button onclick="saveTask()">Save Task</button>
-    <button onclick="deleteTask()">Delete Task</button>
+  <button onclick="deleteTask()">Delete Task</button>
 	<button onclick="completeTask()">Complete Task</button>
 	<button onclick="undoComplete()">Undo Completion</button>
 
@@ -29,14 +29,14 @@
     const urlParams = new URLSearchParams(window.location.search);
 	let questId = urlParams.get('questId');
 	let tasksId = `tasks_${questId}`;
-	let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
-    let index = parseInt(urlParams.get('index'));
-    let task = tasks[index];
+	let tasks = JSON.parse(localStorage.getItem(tasksId));
+  let index = parseInt(urlParams.get('index'));
+  let task = tasks[index];
 
     const form = document.getElementById('taskForm');
     form.querySelector('#title').value = task.title;
     form.querySelector('#content').value = task.content;
-	form.querySelector('#dueDate').value = task.dueDate;
+	  form.querySelector('#dueDate').value = task.dueDate;
     form.querySelector('#points').value = task.points;
 	
 
@@ -78,17 +78,17 @@
     const dateB = new Date(b.dueDate);
 
     // Compare dates first, then sort by index as a tiebreaker
-    if (dateA === dateB) {
-      return a.index - b.index; // Sort by index if dates are equal
-    } else {
-      return dateB - dateA; // Sort by latest due date first
+    if (dateB > dateA) {
+      return DateB - DateA; // Sort by latest due date first
+    } else if (dateA === dateB) {
+      return a.dueDate-b.dueDate; // Sort by index if dates are equal
     }
   });
 }
 
     function deleteTask() {
       tasks.splice(index, 1);
-      localStorage.setItem('tasksId', JSON.stringify(tasks));
+      localStorage.setItem(tasksId, JSON.stringify(tasks));
       window.location.href = 'tasks.html?questId='+`${questId}`;
     }
   </script>
