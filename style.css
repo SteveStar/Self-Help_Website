@@ -47,7 +47,46 @@ nav ul li a:hover {
     border-radius: 5px;
     text-align: center;
     color: white;
-}
+   
+} 
+p {
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        line-height: 48px;
+        margin-top: 60px;
+        padding: 10px 20px;
+        letter-spacing: 2px;
+        word-spacing: 10px;
+      }
+      
+
+#banner {
+    background-image: url("https://i0.wp.com/leaderchat.org/wp-content/uploads/2016/12/goal2.jpg?fit=2560%2C1920&ssl=1");
+    background-size: cover;
+    background-position: center;
+    height: 700px; 
+    width: 100%;
+  }
+  
+  #banner .content h1 {
+    border: 3px solid white;
+    position: relative;
+    top: 50px;
+    width: 400px;
+    margin: 0 auto;
+  }
+  
+  #main {
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+    width: 400px;
+    height: 1000px;
+    overflow: scroll;
+  }
+
+
+
 
 .brandNewQuest a{
     text-decoration: none;
@@ -73,15 +112,6 @@ h2 {
     color: 293054;
 }
 
-footer {
-    background-color: 293054;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
 
 
 @media only screen and (max-width: 600px) {
@@ -120,16 +150,82 @@ footer {
     background-color: #0056b3;
 }
 
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f8f9fa; 
-    color: #6c757d;
+
+  .byline {
+    border-bottom: 1px solid LightGrey;
+    border-top: 1px solid LightGrey;
+    color: DarkGrey;
+    font-size: 14px;
+    font-weight: 200;
+  }
   
-  footer p {
-    margin: 0;
-    font-size: 0.875rem;
+  .share {
+    border: 1px solid LightGrey;
+    padding: 40px 0px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .share a {
+    background: #0056b3;
+    border: 1px solid#0056b3;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    margin: 10px;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  .share a:hover {
+    background: rgb(0, 0, 0);
+    border: 1px solidC;
+    color:#0056b3;
   }
 
-} 
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0 0 60px; 
+    background-color: #000000
+}
+.review-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+.review-box {
+    background-color: #0056b3;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.review-box h3 {
+    margin-top: 0;
+    color: #000000;
+}
+.review-box p {
+    color: #000000;
+    line-height: 1.5;
+}
+
+footer {
+    background-color:  #7490f6;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1; 
+    margin-top: 20px;
+}
+footer p {
+    margin: 0;
+    font-size: 0.875rem;
+}
