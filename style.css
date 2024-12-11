@@ -4,7 +4,6 @@
     --tertiary-color: #fff;
 }
 
-
 header{
     width: 100vw;
     height: 100px;
@@ -51,45 +50,42 @@ nav ul li a:hover {
     text-align: center;
     color: white;
    
-} 
+}
+
 p {
-        color: rgb(0, 0, 0);
-        font-size: 16px;
-        line-height: 48px;
-        margin-top: 60px;
-        padding: 10px 20px;
-        letter-spacing: 2px;
-        word-spacing: 10px;
-      }
-      
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    line-height: 48px;
+    margin-top: 60px;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+    word-spacing: 10px;
+}
 
 #banner {
     background-image: url("https://i0.wp.com/leaderchat.org/wp-content/uploads/2016/12/goal2.jpg?fit=2560%2C1920&ssl=1");
     background-size: cover;
     background-position: center;
-    height: 700px; 
+    height: 700px;
     width: 100%;
-  }
+}
   
-  #banner .content h1 {
+#banner .content h1 {
     border: 3px solid white;
     position: relative;
     top: 50px;
     width: 400px;
     margin: 0 auto;
-  }
+}
   
-  #main {
+#main {
     margin: 0 auto;
     padding: 40px;
     text-align: center;
     width: 400px;
     height: 1000px;
     overflow: scroll;
-  }
-
-
-
+}
 
 .brandNewQuest a{
     text-decoration: none;
@@ -115,8 +111,6 @@ h2 {
     color: 293054;
 }
 
-
-
 @media only screen and (max-width: 600px) {
     header, footer {
         padding: 10px;
@@ -133,6 +127,7 @@ h2 {
         margin: 10px;
     }
 }
+
 .projects .details {
     display: none; 
     font-size: 14px;
@@ -153,24 +148,23 @@ h2 {
     background-color: #0056b3;
 }
 
-
-  .byline {
+.byline {
     border-bottom: 1px solid LightGrey;
     border-top: 1px solid LightGrey;
     color: DarkGrey;
     font-size: 14px;
     font-weight: 200;
-  }
+}
   
-  .share {
+.share {
     border: 1px solid LightGrey;
     padding: 40px 0px;
     position: relative;
     text-align: center;
     width: 100%;
-  }
+}
   
-  .share a {
+.share a {
     background: #0056b3;
     border: 1px solid#0056b3;
     border-radius: 3px;
@@ -179,27 +173,29 @@ h2 {
     margin: 10px;
     padding: 14px;
     text-decoration: none;
-  }
+}
   
-  .share a:hover {
+.share a:hover {
     background: rgb(0, 0, 0);
     border: 1px solidC;
     color:#0056b3;
-  }
+}
 
 
-  body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0 0 60px; 
     background-color: #000000
 }
+
 .review-container {
     display: flex;
     justify-content: space-around;
     gap: 20px;
     flex-wrap: wrap; 
 }
+
 .review-box {
     background-color: #0056b3;
     border: 1px solid #ccc;
@@ -208,27 +204,70 @@ h2 {
     width: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .review-box h3 {
     margin-top: 0;
     color: #000000;
 }
+
 .review-box p {
     color: #000000;
     line-height: 1.5;
 }
 
-footer {
-    
-    color: white;
-    text-align: center;
-    padding: 5px;
-    position: fixed;
-    bottom: 0;
+.form-container {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    z-index: 1; 
-    margin-top: 20px;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-footer p {
-    margin: 0;
-    font-size: 0.875rem;
+
+
+.form-container h1 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.form-container label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-container input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #357abd;
 }
