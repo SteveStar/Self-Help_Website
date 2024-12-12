@@ -111,7 +111,7 @@ function setCycle() {
   if (Notification.permission !== "granted") {
     // Request permission if not already granted
     Notification.requestPermission().then(permission => {
-      if (permission == "granted") {
+      if (permission === "granted") {
         startNotificationCycle(notifDelay, hoursBefore);
       }
     });
@@ -123,6 +123,42 @@ function setCycle() {
     console.log("Enable notifications, or something...");
   }
 }
+
+notificationSystem();
+
+function notificationSystem() {
+  // Sort tasks by their notification timestamps (assuming notif1 property)
+  tasks.sort((a, b) => new Date(a.notif1) - new Date(b.notif1));
+
+  // Check notification permission
+  if (Notification.permission === "granted" || permission === "granted") {
+    for (let i = 0; i < tasks.length; i++) {
+      const task = tasks[i];
+
+      // Skip tasks without a notification
+      if (!task.notif1) {
+        continue;
+      }
+
+      // Extract message and timestamp from task
+      const message = task.title.toString();
+      const timestamp = new Date(task.notif1);
+      scheduleNotification(message, timestamp);
+    }
+  } else {
+    // Handle permission not granted (e.g., request permission)
+    console.warn("Notification permission not granted.");
+  }
+}
+
+function scheduleNotification(message, timestamp) {
+  // Calculate delay and schedule notification
+  const delay = timestamp - Date.now();
+  setTimeout(() => {
+    new Notification(message);
+  }, delay);
+}
+
 </script>
 </body>
 </html>
