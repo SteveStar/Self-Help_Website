@@ -8,13 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-<body>
+<body> 
+
   <h1>Just do it!</h1>
   <ul id="taskList"></ul>
   <div id="createTask"></div>
-  <label for="points">Points:</label>
-  <div id="points">0</div><br><br>
- 
+  <label for="xp">Points:</label>
+  <div id="xp">0</div><br><br>
+  <a href="PageOne.html">Back to quests page</a>
+  <label for="notifDelay">Number of minutes between cyclic notifications (for all tasks)</label>
+  <input id="notifDelay" type="number" min="0"></input><br><br>
+  <label for="hoursBefore">Number of hours before a task begins cyclic notification (for all tasks)</label>
+  <input id="hoursBefore" type="number" min="0"></input><br><br>
+  <button onclick="setCycle()">Set Notification Cycle</button>
+  <button onclick="stopNotifications()">Stop notification cycle</button>
+<!--Add a class here to modify the design; design should be universal.-->
  
 <script>
 const urlParams = new URLSearchParams(window.location.search);
@@ -25,60 +33,131 @@ console.log(tasksId);
 let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
 let pointsCounter = 0;
     function displayTasks() {
-      let taskList = document.getElementById('taskList');
+    let taskList = document.getElementById('taskList');
 	  let createTask = document.getElementById('createTask')
       taskList.innerHTML = ''; // Clear existing content
 
       tasks.forEach((task, index) => {
         let li = document.createElement('li');
         li.innerHTML = `
-          <h2>${task.title}</h2>
-		  <p>${task.content}</p>
-		  <p>${task.dueDate}</p>
-		  <p>${task.dayName}</p>
-		  <p>XP=${task.points}</p>
-          <a href='task.html?questId=${questId}&index=${index}'>Edit</a>
+         <h2>${task.title}</h2>
+		     <p>${task.content}</p>
+		     <p>${task.dueDate}</p>
+		     <p>${task.dayName}</p>
+		     <p>XP=${task.points}</p>
+         <a href='task.html?questId=${questId}&index=${index}'>Edit</a>
         `;
 			if (task.completed === "true") {
 				li.classList.add("completed");
 				pointsCounter = pointsCounter + parseFloat(task.points);
 			} 
-	  
         taskList.appendChild(li);
 		});
 	  let link = document.createElement('a');
 	  link.textContent = "Create task";
 	  link.href = 'new-task.html?questId='+`${questId}`;
 	  createTask.appendChild(link);
-	  document.getElementById('points').textContent = pointsCounter;
+	  document.getElementById('xp').textContent = pointsCounter;
     }
 
     displayTasks();
-	
-function checkForNotifications() {
-  for ( let i = 0; tasks.length > i; i++) {
-    let task = tasks[i];
-    let dueDate = new Date(task.dueDate).getTime();
-    let timeDifference = dueDate - Date.now();
 
-    if (0 >= timeDifference) {
-      alert(`${task.title}` + " is due");
-	  continue;
-    } else if (3600000 >= timeDifference > 0) {
-	alert(`${task.title}` + " is due in " + `${Math.ceil(timeDifference/60000)}` + " minutes");
-	continue;
-	}else{
-	continue;
-	}
+let questIntervals=[];
+
+function startNotificationCycle (notifDelay, hoursBefore) {
+  if (notifDelay > 0 && hoursBefore > 0) {
+    checkNotifications(hoursBefore);
+    questIntervals[questId] = setInterval(() => {
+      checkNotifications(hoursBefore);
+    }, notifDelay * 60000);
   }
-  setTimeout(checkForNotifications, 60000);
-} //This function can be adapted for hours, days, etc...
-checkForNotifications();
+}
+
+function checkNotifications(hoursBefore) {
+  for (i = 0; i < tasks.length; i++) {
+        let due = new Date(tasks[i].dueDate);
+        console.log(due)
+        let now = Date.now();
+        let timeDifference = due-now;
+        console.log("valid notification cycle");
+        if (0 >= timeDifference) {
+          // Send notification for the overdue task
+          new Notification("Urgency Note", { body: `${tasks[i].title} is overdue`});
+        } else if ((3600000*hoursBefore >= timeDifference) && (timeDifference > 0)) {
+          // Send notification for tasks within notification timeframe
+          new Notification("Urgency Note", { body: `${tasks[i].title} is due in ${Math.ceil((timeDifference)/60000)} minutes`});
+        } else {
+          console.log("notification error")
+        }
+}
+}
+
+function stopNotifications(questId) {
+  if (questIntervals[questId] !== undefined) {
+    clearInterval(questIntervals[questId]);
+    delete questIntervals[questId];
+  }
+}
 
 
-</script>
-</body>
-</html>
+function setCycle() {
+  // Get values from input fields
+  const notifDelay = document.getElementById('notifDelay').value;
+  const hoursBefore = document.getElementById('hoursBefore').value;
+
+  //Clear notification cycles
+  stopNotifications(questId);
+
+  if (Notification.permission !== "granted") {
+    // Request permission if not already granted
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        startNotificationCycle(notifDelay, hoursBefore);
+      }
+    });
+  } else if (Notification.permission === "granted") {
+    //Permission granted, set cycle
+    startNotificationCycle(notifDelay, hoursBefore);
+  } else {
+    //Permission error
+    console.log("Enable notifications, or something...");
+  }
+}
+
+notificationSystem();
+
+function notificationSystem() {
+  // Sort tasks by their notification timestamps (assuming notif1 property)
+  tasks.sort((a, b) => new Date(a.notif1) - new Date(b.notif1));
+
+  // Check notification permission
+  if (Notification.permission === "granted" || permission === "granted") {
+    for (let i = 0; i < tasks.length; i++) {
+      const task = tasks[i];
+
+      // Skip tasks without a notification
+      if (!task.notif1) {
+        continue;
+      }
+
+      // Extract message and timestamp from task
+      const message = task.title.toString();
+      const timestamp = new Date(task.notif1);
+      scheduleNotification(message, timestamp);
+    }
+  } else {
+    // Handle permission not granted (e.g., request permission)
+    console.warn("Notification permission not granted.");
+  }
+}
+
+function scheduleNotification(message, timestamp) {
+  // Calculate delay and schedule notification
+  const delay = timestamp - Date.now();
+  setTimeout(() => {
+    new Notification(message);
+  }, delay);
+}
 
 </script>
 </body>
