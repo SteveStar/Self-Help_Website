@@ -3,6 +3,7 @@
     --background-color: #293054; /* Details Color */
     --letter-color: #e9e9e9;
     --button-colors: #0056b3;
+    --swap-colors:#0056b3;
 }
 
 .darkmode {
@@ -10,6 +11,7 @@
     --background-color: #222222; /* Details Color */
     --letter-color: #9c9c9c;
     --button-colors: #1f3348;
+    --swap-colors: #0c0c0c;
 }
 
 html {
@@ -27,6 +29,39 @@ header{
     text-align: center;
     padding-top: 10px;
     background-color: var(--container-color);
+}
+
+#theme-switch {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--swap-colors);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: none;
+}
+
+#theme-switch svg {
+    fill: var(--letter-color);
+    height: 35px;
+    width: 35px;
+}
+
+#theme-switch svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+    display: block;
 }
 
 header .inner{
