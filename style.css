@@ -92,13 +92,17 @@ nav ul li a:hover {
 }
 
 .motivator {
-    background-color: var(--tertiary-color);
+    background-color: var(--background-color);
     width: 15%;
     margin-left: 30px;
     border: 2px #222222 solid;
     padding: 5px;
     text-align: center;
-    color: white;
+    color: var(--letter-color);
+}
+
+#questList li {
+    background-color: (--background-color);
 }
 
 p {
@@ -141,13 +145,13 @@ p {
 
 .brandNewQuest a{
     text-decoration: none;
-    background-color: #37474F;
+    background-color: var(--background-color);
     width: 15%;
     margin-left: 100px;
     border: none;
     text-align: center;
     padding: 8px;
-    color: white;
+    color: var(--letter-color);
 }
 
 section {
