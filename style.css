@@ -1,16 +1,67 @@
-* {
-    --primary-color: #fff;
-    --secondary-color: #293054;
-    --tertiary-color: #fff;
+:root {
+    --container-color: #7490f6 ; /* Background color */
+    --background-color: #293054; /* Details Color */
+    --letter-color: #e9e9e9;
+    --button-colors: #0056b3;
+    --swap-colors:#0056b3;
+}
+
+.darkmode {
+    --container-color: #464646 ; /* Background color */
+    --background-color: #222222; /* Details Color */
+    --letter-color: #9c9c9c;
+    --button-colors: #1f3348;
+    --swap-colors: #0c0c0c;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 12%;
 }
 
 header{
-    width: 100vw;
-    height: 100px;
+    width: 100%;
+    height: 100%;
+    color: var(--letter-color);
     border-bottom: solid 1px rgba(16, 16, 16, 0.1);
     font-family: 'Poppins';
     text-align: center;
-    
+    padding-top: 10px;
+    background-color: var(--container-color);
+}
+
+#theme-switch {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--swap-colors);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: none;
+}
+
+#theme-switch svg {
+    fill: var(--letter-color);
+    height: 35px;
+    width: 35px;
+}
+
+#theme-switch svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+    display: block;
 }
 
 header .inner{
@@ -41,15 +92,13 @@ nav ul li a:hover {
 }
 
 .motivator {
-    
-    background-color: #7490f6;
+    background-color: var(--tertiary-color);
     width: 15%;
     margin-left: 30px;
-    border: 5px #5666a0 solid;
-    border-radius: 5px;
+    border: 2px #222222 solid;
+    padding: 5px;
     text-align: center;
     color: white;
-   
 }
 
 p {
@@ -59,7 +108,6 @@ p {
     margin-top: 60px;
     padding: 10px 20px;
     letter-spacing: 2px;
-    word-spacing: 10px;
 }
 
 #banner {
@@ -71,13 +119,17 @@ p {
 }
   
 #banner .content h1 {
-    border: 3px solid white;
+    border-radius: 5px;
     position: relative;
     top: 50px;
     width: 400px;
     margin: 0 auto;
+    background-color: var(--container-color);
+    color: var(--letter-color);
+    text-align: center;
+    padding: 5px;
 }
-  
+
 #main {
     margin: 0 auto;
     padding: 40px;
@@ -89,20 +141,18 @@ p {
 
 .brandNewQuest a{
     text-decoration: none;
-    background-color: #7490f6;
+    background-color: #37474F;
     width: 15%;
     margin-left: 100px;
-    border: 5px #5666a0 solid;
-    border-radius: 5px;
+    border: none;
     text-align: center;
-    padding: 5px;
+    padding: 8px;
     color: white;
 }
 
 section {
     padding: 20px;
     margin: 20px;
-    background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px 293054(0, 0, 0, 0.1);
 }
@@ -157,36 +207,35 @@ h2 {
 }
   
 .share {
-    border: 1px solid LightGrey;
     padding: 40px 0px;
     position: relative;
     text-align: center;
     width: 100%;
+    background-color: var(--container-color);
 }
   
 .share a {
-    background: #0056b3;
-    border: 1px solid#0056b3;
+    background: var(--button-colors); 
+    border: none;
     border-radius: 3px;
-    color: rgb(0, 0, 0);
+    color: var(--letter-color);
     display: inline-block;
     margin: 10px;
     padding: 14px;
     text-decoration: none;
+    transition: 0.5s;
 }
   
 .share a:hover {
-    background: rgb(0, 0, 0);
     border: 1px solidC;
-    color:#0056b3;
+    background-color: #04149d;
 }
-
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0 0 60px; 
-    background-color: #000000
+    height: 100%;
+    
 }
 
 .review-container {
@@ -194,11 +243,12 @@ body {
     justify-content: space-around;
     gap: 20px;
     flex-wrap: wrap; 
+    position: center;
+    background-color: var(--background-color);
 }
 
 .review-box {
-    background-color: #0056b3;
-    border: 1px solid #ccc;
+    background-color: var(--button-colors); 
     border-radius: 10px;
     padding: 20px;
     width: 300px;
@@ -216,7 +266,6 @@ body {
 }
 
 .form-container {
-    background: #ffffff;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -228,11 +277,9 @@ body {
     gap: 10px;
 }
 
-
 .form-container h1 {
     margin-bottom: 20px;
     font-size: 1.8em;
-    color: #333;
 }
 
 .form-container label {
@@ -270,4 +317,22 @@ body {
 
 .form-container button:hover {
     background-color: #357abd;
+ 
+}
+
+#customer-reviews {
+    text-align: center;
+    padding-bottom: 15px;
+    color: var(--letter-color);
+ 
+}
+
+.lower-area {
+    background-color: var(--background-color);
+}
+
+footer p {
+    text-align: center;
+    padding: 40px;
+    color: var(--letter-color);
 }
