@@ -55,26 +55,16 @@ console.log(tasksId);
       };
 
       tasks.push(newTask);
-	    const sortedTasks = sortTasks(tasks);
-      localStorage.setItem(tasksId, JSON.stringify(sortedTasks));
+	    tasks.sort((a, b) => {
+    const dateA = new Date (a.dueDate);
+    const dateB = new Date (b.dueDate);
+    return dateA - dateB;
+  });
+      localStorage.setItem(tasksId, JSON.stringify(tasks));
 
       window.location.href = 'tasks.html?questId='+`${questId}`;
     }
 	
-	function sortTasks(tasks) {
-	return tasks.sort((a, b) => {
-    const dateA = new Date(a.dueDate);
-    const dateB = new Date(b.dueDate);
-
-    // Compare dates first, then sort by index as a tiebreaker
-    if (dateA === dateB) {
-      return a.index - b.index; // Sort by index if dates are equal
-    } else {
-      return dateB - dateA; // Sort by latest due date first
-    }
-  });
-}
-
     document.getElementById('task-form').addEventListener('submit', (event) => {
       event.preventDefault();
       createTask();

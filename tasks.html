@@ -18,7 +18,7 @@
   <h1 id="manage-quest">Manage Quest List</h1>
   <ul id="taskList"></ul>
   <div class="create-task-btn" id="createTask"></div> <br>
-  <label class="point-container"for="xp">Points</label>
+  <label class="point-container"for="xp">Score</label>
   <div class="point-container" id="xp">0</div><br><br>
   <a href="PageOne.html" class="return-home-btn">Back to quests page</a> <br><br>
   <label class="label-input-notif" for="notifDelay">Number of minutes between cyclic notifications (for all tasks)</label>
@@ -55,7 +55,11 @@ let pointsCounter = 0;
 			if (task.completed === "true") {
 				li.classList.add("completed");
 				pointsCounter = pointsCounter + parseFloat(task.points);
-			} 
+      } else if (task.completed === "false"){
+        li.classList.add("incomplete");
+      } else {
+        console.log("Class error");
+      }
         taskList.appendChild(li);
 		});
 	  let link = document.createElement('a');

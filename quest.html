@@ -55,6 +55,8 @@
     function deleteQuest() {
       quests.splice(questId, 1);
       localStorage.setItem('quests', JSON.stringify(quests));
+      let tasksId = `tasks_${questId+1}`;
+      localStorage.removeItem(tasksId);
       window.location.href = 'PageOne.html';
     }	
   </script>
