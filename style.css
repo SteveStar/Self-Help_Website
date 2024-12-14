@@ -96,7 +96,7 @@ nav ul li a:hover {
 }
 
 .motivator {
-    background-color: var(--tertiary-color);
+    background-color: var(--container-color);
     width: 15%;
     margin-left: 30px;
     border: 3px solid var(--border-colors);
@@ -278,49 +278,42 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: var(--container-color);
+    margin-left: 20px;
+    
 }
 
 .form-container h1 {
     margin-bottom: 20px;
     font-size: 1.8em;
+    color: var(--letter-color)
 }
 
 .form-container label {
     font-weight: bold;
-    color: #555;
     display: block;
     margin-bottom: 8px;
+    color: var(--letter-color)
 }
 
 .form-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-colors);
     border-radius: 4px;
     font-size: 14px;
-}
-
-.form-container input:focus {
-    border-color: #4a90e2;
-    outline: none;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
 }
 
 .form-container button {
     width: 100%;
     padding: 10px;
-    background-color: #4a90e2;
-    color: white;
+    background-color: var(--button-colors);
+    color: var(--letter-color);
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: #357abd;
- 
 }
 
 #customer-reviews {
@@ -489,4 +482,20 @@ footer p {
     background-color: var(--container-color);
     color: var(--letter-color);
     border: 3px var(--border-colors) solid;
+}
+
+.new-task {
+    background-color: var(--container-color);
+    margin: 30px;
+    padding: 5px;
+    text-align: center;
+    color: var(--letter-color);
+}
+
+#questList li {
+    background-color: var(--inner-container);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-radius: 8px; 
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
 }
