@@ -21,7 +21,7 @@
   <label class="head-points" for="content">Content:</label>
   <textarea id="content" name="content" required></textarea><br><br>
 	<label class="head-points" for="dueDate">Due Date</label>
-	<input type="datetime-local" id="dueDate" required></input>
+	<input type="datetime-local" id="dueDate" required></input><br><br>
   <label class="head-points" for="notif1">Set a notification</label>
   <input type="datetime-local" id="notif1"></input><br><br>
 	<label class="head-points" for="points">Points:</label>
@@ -48,49 +48,51 @@
     form.querySelector('#notif1').value = task.notif1;
     
     function saveTask(){
-      const title = document.getElementById('title').value;
+    const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
 	  const dueDate = document.getElementById('dueDate').value;
 	  const points = document.getElementById('points').value;
     const notif1 = document.getElementById('notif1').value;
 
-	  const date = new Date(task.dueDate);
-	  const dayOfWeek = date.getDay();
-	  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-	  const dayName = daysOfWeek[dayOfWeek];
-    tasks[index] = {title, content, dueDate, dayName, points, completed, notif1};
-	sortedTasks = sortTasks(tasks);
-  localStorage.setItem('tasksId', JSON.stringify(sortedTasks));
-	window.location.href = 'tasks.html?questId='+`${questId}`;
+    tasks[index] = {
+      title,
+      content, 
+      dueDate, 
+      points, 
+      completed, 
+      notif1
+    };
+      tasks.sort((a, b) => {
+    const dateA = new Date (a.dueDate);
+    const dateB = new Date (b.dueDate);
+    return dateA - dateB;
+  });
+    localStorage.setItem(tasksId, JSON.stringify(tasks));
+	  window.location.href = 'tasks.html?questId='+`${questId}`;
   }
 	
 	function completeTask() {
 	task.completed = "true";
-	sortedTasks = sortTasks(tasks); // Implement a sorting that sorts out completion after notif system. Optionally make them blank, or make a grid for them, and maybe a grid for tasks, and the whole thing. Maybe let users drag tasks around? More interaction necessary
-	localStorage.setItem(tasksId, JSON.stringify(sortedTasks));
+	tasks.sort((a, b) => {
+    const dateA = new Date (a.dueDate);
+    const dateB = new Date (b.dueDate);
+    return dateA - dateB;
+  });
+	localStorage.setItem(tasksId, JSON.stringify(tasks));
 	window.location.href = "tasks.html?questId="+`${questId}`;
 	}
 	
 	function undoComplete() {
 	task.completed = "false";
-	sortedTasks = sortTasks(tasks);
-	localStorage.setItem(tasksId, JSON.stringify(sortedTasks));
+	tasks.sort((a, b) => {
+    const dateA = new Date (a.dueDate);
+    const dateB = new Date (b.dueDate);
+    return dateA - dateB;
+  });
+	localStorage.setItem(tasksId, JSON.stringify(tasks));
 	window.location.href = 'tasks.html?questId='+`${questId}`;
 	}
 
-	function sortTasks(tasks) {
-  return tasks.sort((a, b) => {
-    const dateA = new Date(a.dueDate);
-    const dateB = new Date(b.dueDate);
-
-    // Compare dates first, then sort by index as a tiebreaker
-    if (dateA > dateB) {
-      return DateA - DateB;// Sort by latest due date first
-    } else if (dateA === dateB) {
-      return a.dueDate-b.dueDate; // Sort by index if dates are equal
-    }
-  });
-}
 
     function deleteTask() {
       tasks.splice(index, 1);

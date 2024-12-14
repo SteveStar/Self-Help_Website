@@ -23,7 +23,7 @@
   <a href="PageOne.html" class="return-home-btn">Back to quests page</a> <br><br>
   <label class="label-input-notif" for="notifDelay">Number of minutes between cyclic notifications (for all tasks)</label>
   <input id="notifDelay" type="number" min="0"></input><br><br>
-  <label class="label-input-notif" for="hoursBefore">Number of hours before a task begins cyclic notification (for all tasks)</label>
+  <label class="label-input-notif" for="hoursBefore">Number of hours before a task begins cyclic notifications (for all tasks)</label>
   <input id="hoursBefore" type="number" min="0"></input><br><br>
   <button class="notif-btn" onclick="setCycle()">Set Notification Cycle</button>
   <button class="notif-btn" onclick="stopNotifications()">Stop notification cycle</button>
@@ -37,9 +37,10 @@ let tasksId = `tasks_${questId}`;
 console.log(tasksId);
 let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
 let pointsCounter = 0;
+
     function displayTasks() {
     let taskList = document.getElementById('taskList');
-	  let createTask = document.getElementById('createTask')
+	  let createTask = document.getElementById('createTask');
       taskList.innerHTML = ''; // Clear existing content
 
       tasks.forEach((task, index) => {
@@ -47,8 +48,7 @@ let pointsCounter = 0;
         li.innerHTML = `
          <h2>${task.title}</h2>
 		     <p>${task.content}</p>
-		     <p>${task.dueDate}</p>
-		     <p>${task.dayName}</p>
+		     <p>${Intl.DateTimeFormat('en-US', {weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}).format(new Date(task.dueDate))}</p>
 		     <p>XP=${task.points}</p>
          <a class="quest-btn" href='task.html?questId=${questId}&index=${index}'>Edit</a>
         `;
@@ -132,13 +132,19 @@ function setCycle() {
 
 function scheduleNotification(message, timestamp) {
   // Calculate delay and schedule notification
-  
-
+  if (Date.now() < timestamp) {
+    const delay = timestamp - Date.now();
+  setTimeout(() => {
+    new Notification(message);
+  }, delay);
+} else {
+  console.log(`Notification for ${message} passed`)
+};
 }
 
 function notificationSystem() {
   // Sort tasks by their notification timestamps (assuming notif1 property)
-  tasks.sort((a, b) => new Date(a.notif1) - new Date(b.notif1));
+  tasks.sort((a, b) => (a.notif1 - b.notif1));
 
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
@@ -150,15 +156,8 @@ function notificationSystem() {
 
       // Extract message and timestamp from task
       const message = task.title.toString();
-      const timestamp = new Date(task.notif1);
-      if (Date.now() < timestamp) {
-    const delay = timestamp - Date.now();
-  setTimeout(() => {
-    new Notification(message);
-  }, delay);
-} else {
-  console.log("error")
-};
+      const timestamp = new Date (task.notif1);
+      scheduleNotification(message, timestamp)
 };
 }
 
