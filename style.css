@@ -96,14 +96,13 @@ nav ul li a:hover {
 }
 
 .motivator {
-    background-color: var(--container-color);
+    background-color: var(--tertiary-color);
     width: 15%;
     margin-left: 30px;
     border: 3px solid var(--border-colors);
     padding: 5px;
     text-align: center;
-    color: var(--letter-color);
-
+    color: white;
 }
 
 p {
@@ -146,7 +145,7 @@ p {
 
 .brandNewQuest a{
     text-decoration: none;
-    background-color: var(--container-color);
+    background-color: #37474F;
     width: 15%;
     margin-left: 100px;
     border: none;
