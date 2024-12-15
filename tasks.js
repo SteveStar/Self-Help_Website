@@ -1,4 +1,4 @@
-wimport {notificationSystem, scheduleNotification} from './notifications.js';
+import {notificationSystem, scheduleNotification} from './notifications.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 let questId = urlParams.get('questId');
