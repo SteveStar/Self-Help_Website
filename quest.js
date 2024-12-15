@@ -24,7 +24,7 @@ const urlParams = new URLSearchParams(window.location.search);
 	
 
     function deleteQuest() {
-      quests[questId] = {title: 'deleted', content: 'deleted'};
+      quests[questId] = {title: '', content: ''};
       localStorage.setItem('quests', JSON.stringify(quests));
       let tasksId = `tasks_${questId+1}`;
       localStorage.removeItem(tasksId) || '';
