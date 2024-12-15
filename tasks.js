@@ -134,4 +134,7 @@ function setCycle() {
   }
 }
 
+document.getElementbyId("setCycle).addEventListener('click', () => {
+setCycle();
+}
   
