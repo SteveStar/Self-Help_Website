@@ -103,10 +103,8 @@ function checkNotifications(hoursBefore) {
 }
 
 function stopNotifications(questId) {
-  if (questIntervals[questId] !== undefined) {
     clearInterval(questIntervals[questId]);
     delete questIntervals[questId];
-  }
 }
 document.getElementById("stopNotifications").addEventListener('click', () => {
 stopNotifications();
