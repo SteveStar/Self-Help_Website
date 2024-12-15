@@ -108,7 +108,7 @@ function stopNotifications(questId) {
     delete questIntervals[questId];
   }
 }
-document.getElementbyId("stopNotifications").addEventListener('click', () => {
+document.getElementById("stopNotifications").addEventListener('click', () => {
 setCycle();
 });
 
@@ -136,7 +136,7 @@ function setCycle() {
   }
 }
 
-document.getElementbyId("setCycle").addEventListener('click', () => {
+document.getElementById("setCycle").addEventListener('click', () => {
 setCycle();
 });
   
