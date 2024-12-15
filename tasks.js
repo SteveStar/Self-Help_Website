@@ -1,4 +1,4 @@
-import {notificationSystem, scheduleNotification} from './notifications.js';
+wimport {notificationSystem, scheduleNotification} from './notifications.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 let questId = urlParams.get('questId');
@@ -107,7 +107,7 @@ function stopNotifications(questId) {
     delete questIntervals[questId];
 }
 document.getElementById("stopNotifications").addEventListener('click', () => {
-stopNotifications();
+stopNotifications(questId);
 });
 
 function setCycle() {
