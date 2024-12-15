@@ -84,7 +84,7 @@ function startNotificationCycle (notifDelay, hoursBefore) {
 }
 
 function checkNotifications(hoursBefore) {
-  for (i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i++) {
         let due = new Date(tasks[i].dueDate);
         console.log(due)
         let now = Date.now();
