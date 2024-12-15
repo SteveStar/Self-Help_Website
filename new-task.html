@@ -29,62 +29,6 @@
     <button class="notif-btn" type="submit">Create Task</button>
   </form>
 
-  <script>
-  const urlParams = new URLSearchParams(window.location.search);
-let questId = urlParams.get('questId');
-let tasksId = `tasks_${questId}`;
-let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
-
-console.log(questId);
-console.log(tasksId);
-
-   function createTask() {
-      const title = document.getElementById('title').value;
-      const content = document.getElementById('content').value; 
-	  const dueDate = document.getElementById('dueDate').value; 
-	  const points = document.getElementById('points').value;
-    const notif1 = document.getElementById('notif1').value;
-
-	const due = new Date(dueDate);
-	const dayOfWeek = due.getDay();
-	const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-	const dayName = daysOfWeek[dayOfWeek];	  
-
-    const newTask = {
-    title,
-    content,
-		dueDate,
-		dayName, 
-		points,
-		completed: "false",
-    notif1
-      };
-
-      tasks.push(newTask);
-	  const sortedTasks = sortTasks(tasks);
-      localStorage.setItem(tasksId, JSON.stringify(sortedTasks));
-
-      window.location.href = 'tasks.html?questId='+`${questId}`;
-    }
-	
-	function sortTasks(tasks) {
-	return tasks.sort((a, b) => {
-    const dateA = new Date(a.dueDate);
-    const dateB = new Date(b.dueDate);
-
-    // Compare dates first, then sort by index as a tiebreaker
-    if (dateA === dateB) {
-      return a.index - b.index; // Sort by index if dates are equal
-    } else {
-      return dateB - dateA; // Sort by latest due date first
-    }
-  });
-}
-
-    document.getElementById('task-form').addEventListener('submit', (event) => {
-      event.preventDefault();
-      createTask();
-    });
-  </script>
+<script src="new-task.js" defer></script>
 </body>
 </html>

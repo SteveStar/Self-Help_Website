@@ -37,29 +37,6 @@
 <div class="brandNewQuest">
   <a href="new-quest.html">Create New Quest</a>
 </div>
-
-<script>
-const quests = JSON.parse(localStorage.getItem('quests')) || [];
-  function displayQuests() {
-    const taskList = document.getElementById('taskList');
-    questList.innerHTML = ''; // Clear existing content
-    quests.forEach((quest, index) => {
-     li = document.createElement('li'); //Add customization to the listed quests here. CSS; remove bullet point, align.
-      li.innerHTML = ` 
-        <h2>${quest.title}</h2>
-        <p>${quest.content}</p>
-        <a class="quest-btn" href='tasks.html?questId=${index + 1}'>Manage quest</a>
-        <a class="quest-btn" href="quest.html?questId=${index}">Edit quest</a>
-      `;
-      questList.appendChild(li);
-    });
-  }
-
-  displayQuests();
-
-</script>
+<script src="quests.js" defer></script>
 </body>
-
-    <script src="script.js"></script>
-
 </html>

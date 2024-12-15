@@ -18,165 +18,17 @@
   <h1 id="manage-quest">Manage Quest List</h1>
   <ul id="taskList"></ul>
   <div class="create-task-btn" id="createTask"></div> <br>
-  <label class="point-container"for="xp">Points</label>
+  <label class="point-container"for="xp">Score</label>
   <div class="point-container" id="xp">0</div><br><br>
   <a href="PageOne.html" class="return-home-btn">Back to quests page</a> <br><br>
   <label class="label-input-notif" for="notifDelay">Number of minutes between cyclic notifications (for all tasks)</label>
   <input id="notifDelay" type="number" min="0"></input><br><br>
-  <label class="label-input-notif" for="hoursBefore">Number of hours before a task begins cyclic notification (for all tasks)</label>
+  <label class="label-input-notif" for="hoursBefore">Number of hours before a task begins cyclic notifications (for all tasks)</label>
   <input id="hoursBefore" type="number" min="0"></input><br><br>
   <button class="notif-btn" onclick="setCycle()">Set Notification Cycle</button>
   <button class="notif-btn" onclick="stopNotifications()">Stop notification cycle</button>
 <!--Add a class here to modify the design; design should be universal.-->
  
-<script>
-const urlParams = new URLSearchParams(window.location.search);
-let questId = urlParams.get('questId');
-console.log(questId);
-let tasksId = `tasks_${questId}`;
-console.log(tasksId);
-let tasks = JSON.parse(localStorage.getItem(tasksId)) || [];
-let pointsCounter = 0;
-    function displayTasks() {
-    let taskList = document.getElementById('taskList');
-	  let createTask = document.getElementById('createTask')
-      taskList.innerHTML = ''; // Clear existing content
-
-      tasks.forEach((task, index) => {
-        let li = document.createElement('li');
-        li.innerHTML = `
-         <h2>${task.title}</h2>
-		     <p>${task.content}</p>
-		     <p>${task.dueDate}</p>
-		     <p>${task.dayName}</p>
-		     <p>XP=${task.points}</p>
-         <a class="quest-btn" href='task.html?questId=${questId}&index=${index}'>Edit</a>
-        `;
-			if (task.completed === "true") {
-				li.classList.add("completed");
-				pointsCounter = pointsCounter + parseFloat(task.points);
-			} 
-        taskList.appendChild(li);
-		});
-	  let link = document.createElement('a');
-	  link.textContent = "Create task";
-	  link.href = 'new-task.html?questId='+`${questId}`;
-	  createTask.appendChild(link);
-	  document.getElementById('xp').textContent = pointsCounter;
-    }
-
-    displayTasks();
-
-let questIntervals=[];
-
-function startNotificationCycle (notifDelay, hoursBefore) {
-  if (notifDelay > 0 && hoursBefore > 0) {
-    checkNotifications(hoursBefore);
-    questIntervals[questId] = setInterval(() => {
-      checkNotifications(hoursBefore);
-    }, notifDelay * 60000);
-  }
-}
-
-function checkNotifications(hoursBefore) {
-  for (i = 0; i < tasks.length; i++) {
-        let due = new Date(tasks[i].dueDate);
-        console.log(due)
-        let now = Date.now();
-        let timeDifference = due-now;
-        console.log("valid notification cycle");
-        if (0 >= timeDifference) {
-          // Send notification for the overdue task
-          new Notification("Urgency Note", { body: `${tasks[i].title} is overdue`});
-        } else if ((3600000*hoursBefore >= timeDifference) && (timeDifference > 0)) {
-          // Send notification for tasks within notification timeframe
-          new Notification("Urgency Note", { body: `${tasks[i].title} is due in ${Math.ceil((timeDifference)/60000)} minutes`});
-        } else {
-          console.log("notification error")
-        }
-}
-}
-
-function stopNotifications(questId) {
-  if (questIntervals[questId] !== undefined) {
-    clearInterval(questIntervals[questId]);
-    delete questIntervals[questId];
-  }
-}
-
-
-function setCycle() {
-  // Get values from input fields
-  const notifDelay = document.getElementById('notifDelay').value;
-  const hoursBefore = document.getElementById('hoursBefore').value;
-
-  //Clear notification cycles
-  stopNotifications(questId);
-
-  if (Notification.permission !== "granted") {
-    // Request permission if not already granted
-    Notification.requestPermission().then(permission => {
-      if (permission === "granted") {
-        startNotificationCycle(notifDelay, hoursBefore);
-      }
-    });
-  } else if (Notification.permission === "granted") {
-    //Permission granted, set cycle
-    startNotificationCycle(notifDelay, hoursBefore);
-  } else {
-    //Permission error
-    console.log("Enable notifications, or something...");
-  }
-}
-
-
-function scheduleNotification(message, timestamp) {
-  // Calculate delay and schedule notification
-  
-
-}
-
-function notificationSystem() {
-  // Sort tasks by their notification timestamps (assuming notif1 property)
-  tasks.sort((a, b) => new Date(a.notif1) - new Date(b.notif1));
-
-    for (let i = 0; i < tasks.length; i++) {
-      const task = tasks[i];
-
-      // Skip tasks without a notification
-      if (!task.notif1) {
-        continue;
-      }
-
-      // Extract message and timestamp from task
-      const message = task.title.toString();
-      const timestamp = new Date(task.notif1);
-      if (Date.now() < timestamp) {
-    const delay = timestamp - Date.now();
-  setTimeout(() => {
-    new Notification(message);
-  }, delay);
-} else {
-  console.log("error")
-};
-};
-}
-
-if (Notification.permission !== "granted") {
-    // Request permission if not already granted
-    Notification.requestPermission().then(permission => {
-      if (permission === "granted") {
-        notificationSystem();
-      }
-    });
-  } else if (Notification.permission === "granted") {
-    //Permission granted, set cycle
-    notificationSystem();
-  } else {
-    //Permission error
-    console.log("Enable notifications, or something...");
-  };
-
-</script>
+<script src="tasks.js" type="module" defer></script>
 </body>
 </html>
