@@ -108,7 +108,9 @@ function stopNotifications(questId) {
     delete questIntervals[questId];
   }
 }
-
+document.getElementbyId("stopNotifications").addEventListener('click', () => {
+setCycle();
+});
 
 function setCycle() {
   // Get values from input fields
@@ -134,7 +136,7 @@ function setCycle() {
   }
 }
 
-document.getElementbyId("setCycle).addEventListener('click', () => {
+document.getElementbyId("setCycle").addEventListener('click', () => {
 setCycle();
-}
+});
   
