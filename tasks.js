@@ -109,7 +109,7 @@ function stopNotifications(questId) {
   }
 }
 document.getElementById("stopNotifications").addEventListener('click', () => {
-setCycle();
+stopNotifications();
 });
 
 function setCycle() {
