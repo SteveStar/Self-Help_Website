@@ -506,7 +506,6 @@ footer p {
 #taskList li.incomplete h2 {
     color: var(--letter-color);
 }
-
 #taskList li.incomplete p {
     color: var(--letter-color);
 }

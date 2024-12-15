@@ -21,44 +21,11 @@
     <input type="text" id="title" name="title" required><br><br>
     <label class="head-points" for="content">Content:</label>
     <textarea id="content" name="content" required></textarea><br><br>
-    <button class="notif-btn" onclick="saveQuest()">Save Quest</button>
+    <button type="submit" class="notif-btn" onclick="saveQuest()">Save Quest</button>
+    <button class="notif-btn" onclick="deleteQuest()">Delete Quest</button>
 	</form>
 	
-    <button class="notif-btn" onclick="deleteQuest()">Delete Quest</button>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const questId = parseInt(urlParams.get('questId'));
-    const quests = JSON.parse(localStorage.getItem('quests'));
-    const quest = quests[questId];
-    if (!quest) {
-      window.location.href = 'PageOne.html';
-    }
-
-    const form = document.getElementById('questForm');
-    form.querySelector('#title').value = quest.title;
-    form.querySelector('#content').value = quest.content;
-	
-
-    function saveQuest(){
-
-      const title = document.getElementById('title').value;
-      const content = document.getElementById('content').value;   
-	
-      quests[questId] = {title, content};
-      localStorage.setItem('quests', JSON.stringify(quests));
-
-      window.location.href = 'PageOne.html';
-    }
-	
-
-    function deleteQuest() {
-      quests.splice(questId, 1);
-      localStorage.setItem('quests', JSON.stringify(quests));
-      let tasksId = `tasks_${questId+1}`;
-      localStorage.removeItem(tasksId);
-      window.location.href = 'PageOne.html';
-    }	
-  </script>
+  <script src="quest.js" defer></script>
 </body>
 </html>
