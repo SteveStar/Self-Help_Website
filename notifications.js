@@ -10,7 +10,7 @@ export function scheduleNotification(message, timestamp) {
   };
   }
   
-  export function notificationSystem() {
+ export function notificationSystem(tasks) {
     // Sort tasks by their notification timestamps (assuming notif1 property)
     tasks.sort((a, b) => (a.notif1 - b.notif1));
   
@@ -25,7 +25,6 @@ export function scheduleNotification(message, timestamp) {
         // Extract message and timestamp from task
         const message = task.title.toString();
         const timestamp = new Date (task.notif1);
-        scheduleNotification(message, timestamp)
+        scheduleNotification(message, timestamp);
   };
   }
-  

@@ -1,4 +1,4 @@
-import {notificationSystem, scheduleNotification} from 'notifications.js';
+import {notificationSystem, scheduleNotification} from './notifications.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 let questId = urlParams.get('questId');
@@ -60,12 +60,12 @@ let pointsCounter = 0;
       // Request permission if not already granted
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
-          notificationSystem();
+          notificationSystem(tasks);
         }
       });
     } else if (Notification.permission === "granted") {
       //Permission granted, set cycle
-      notificationSystem();
+      notificationSystem(tasks);
     } else {
       //Permission error
       console.log("Enable notifications, or something...");

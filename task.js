@@ -4,7 +4,7 @@ let tasksId = `tasks_${questId}`;
 let tasks = JSON.parse(localStorage.getItem(tasksId));
 let index = parseInt(urlParams.get('index'));
 let task = tasks[index];
-let completed = tasks.completed;
+let completed = task.completed;
 const form = document.getElementById('taskForm');
 form.querySelector('#title').value = task.title;
 form.querySelector('#content').value = task.content;
@@ -15,8 +15,8 @@ form.querySelector('#notif1').value = task.notif1;
 function saveTask(){
 const title = document.getElementById('title').value;
 const content = document.getElementById('content').value;
-  const dueDate = document.getElementById('dueDate').value;
-  const points = document.getElementById('points').value;
+const dueDate = document.getElementById('dueDate').value;
+const points = document.getElementById('points').value;
 const notif1 = document.getElementById('notif1').value;
 
 tasks[index] = {

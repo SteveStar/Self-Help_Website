@@ -1,5 +1,3 @@
-import {notificationSystem, scheduleNotification} from 'notifications.js';
-
 const quests = JSON.parse(localStorage.getItem('quests')) || [];
   function displayQuests() {
     const questList = document.getElementById('questList');
