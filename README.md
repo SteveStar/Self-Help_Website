@@ -15,6 +15,7 @@ Our team was:
 - Back-End Developer: Alex Aultman
 - Team Lead: Steven Starovoitov
 
-[![Watch the video](https://img.youtube.com/vi/<VIDEO_ID>/0.jpg)](https://www.youtube.com/watch?v=7WhvYwCVtcI)
+
+[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/7WhvYwCVtcI)
 
 ![gif for web dev proj](https://github.com/user-attachments/assets/3d6c4919-1195-430e-ae19-4e8c192c7fd7)
